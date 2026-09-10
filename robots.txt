@@ -3,7 +3,7 @@ permalink: /robots.txt
 ---
 User-agent: *
 Allow: /
-Disallow: /assets/private/
-Disallow: /search.json
+Disallow: {{ '/assets/private/' | relative_url }}
+Disallow: {{ '/search.json' | relative_url }}
 
-Sitemap: {{ "/sitemap.xml" | absolute_url }}
+Sitemap: {{ '/sitemap.xml' | absolute_url }}

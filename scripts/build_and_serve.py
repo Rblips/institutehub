@@ -63,14 +63,7 @@ def liquid_to_jinja(text: str, includes_dict: dict) -> str:
     text = re.sub(r"{%\s*endunless\s*%}", r"{% endif %}", text)
 
     # 3. Convert 'contains': a contains b -> b in (a or '')
-    def replace_contains(match):
-        pre = match.group(1)
-        a = match.group(2)
-        b = match.group(3)
-        post = match.group(4)
-        return f"{pre}{b} in ({a} or ''){post}"
-    
-    text = re.sub(r"({%\s*(?:if|elif)\s+.*?)([a-zA-Z0-9_.]+)\s+contains\s+([a-zA-Z0-9_.\"':\-\/]+)(.*?\s*%})", replace_contains, text)
+    text = re.sub(r'([a-zA-Z0-9_.]+)\s+contains\s+([a-zA-Z0-9_."\':\-\/]+)', r'(\2 in (\1 or ""))', text)
 
     # 4. Convert for loops with limit: {% for x in arr limit: 4 %} -> {% for x in arr[:4] %}
     text = re.sub(r"{%\s*for\s+([a-zA-Z0-9_]+)\s+in\s+([a-zA-Z0-9_.]+)\s+limit:\s*(\d+)\s*%}", r"{% for \1 in \2[:\3] %}", text)
@@ -118,8 +111,8 @@ def build_site():
         "title": config_data.get("title", "InstituteHub"),
         "tagline": config_data.get("tagline", "Engineering Knowledge. Advancing Tomorrow."),
         "description": config_data.get("description", ""),
-        "url": "http://127.0.0.1:4000",
-        "baseurl": "",
+        "url": config_data.get("url", "https://rblips.github.io"),
+        "baseurl": config_data.get("baseurl", ""),
         "institute": config_data.get("institute", {}),
         "stats": config_data.get("stats", {}),
         "navigation": config_data.get("navigation", []),
@@ -219,9 +212,24 @@ def build_site():
     def relative_url(url):
         if not url:
             return ""
-        if str(url).startswith("/"):
-            return site["baseurl"] + str(url)
-        return site["baseurl"] + "/" + str(url)
+        url_str = str(url)
+        base = site["baseurl"]
+        if not base:
+            return url_str
+        if url_str == base or url_str.startswith(base + "/"):
+            return url_str
+        if url_str.startswith("/"):
+            return base + url_str
+        return base + "/" + url_str
+
+    def absolute_url(url):
+        if not url:
+            return site["url"] + (site["baseurl"] or "")
+        url_str = str(url)
+        if url_str.startswith("http://") or url_str.startswith("https://"):
+            return url_str
+        rel = relative_url(url_str)
+        return site["url"] + (rel if rel.startswith("/") else "/" + rel)
 
     def date_filter(val, fmt="%B %d, %Y"):
         if isinstance(val, str):
@@ -253,7 +261,7 @@ def build_site():
 
     env = jinja2.Environment(autoescape=False)
     env.filters["relative_url"] = relative_url
-    env.filters["absolute_url"] = lambda u: site["url"] + (u if str(u).startswith("/") else "/" + str(u))
+    env.filters["absolute_url"] = absolute_url
     env.filters["date"] = date_filter
     env.filters["date_to_xmlschema"] = lambda d: parse_date(d).isoformat()
     env.filters["truncatewords"] = truncatewords
@@ -310,6 +318,8 @@ def build_site():
         ("contact/index.md", "/contact/", "page"),
         ("404.html", "/404.html", "default"),
         ("maintenance.html", "/maintenance.html", None),
+        ("robots.txt", "/robots.txt", None),
+        ("sitemap.xml", "/sitemap.xml", None),
     ]
 
     for rel_path, url, default_layout in pages_to_render:
@@ -377,7 +387,7 @@ def build_site():
             "subtitle": f"{item.get('designation')} - {item.get('department')}",
             "category": "Faculty",
             "department": item.get("department"),
-            "url": item.get("url"),
+            "url": relative_url(item.get("url")),
             "summary": ", ".join(item.get("research_interests", [])),
             "content": strip_html(item.get("raw_body"))[:200],
         })
@@ -387,7 +397,7 @@ def build_site():
             "subtitle": f"{item.get('area')} | PI: {item.get('principal_investigator')}",
             "category": "Research",
             "department": item.get("department", "Interdisciplinary"),
-            "url": item.get("url"),
+            "url": relative_url(item.get("url")),
             "summary": item.get("description", ""),
             "content": strip_html(item.get("raw_body"))[:200],
         })
@@ -397,7 +407,7 @@ def build_site():
             "subtitle": f"{item.get('department')} - {item.get('credits')} Credits",
             "category": "Courses",
             "department": item.get("department"),
-            "url": item.get("url"),
+            "url": relative_url(item.get("url")),
             "summary": item.get("description", ""),
             "content": strip_html(item.get("raw_body"))[:200],
         })
@@ -407,7 +417,7 @@ def build_site():
             "subtitle": f"{item.get('category')} | {item.get('location')}",
             "category": "Events",
             "department": "Campus",
-            "url": item.get("url"),
+            "url": relative_url(item.get("url")),
             "summary": f"{item.get('date')} - {item.get('time')}",
             "content": strip_html(item.get("raw_body"))[:200],
         })
@@ -417,7 +427,7 @@ def build_site():
             "subtitle": f"{item.get('category')} Notice | {item.get('ref_no')}",
             "category": "Notices",
             "department": item.get("department"),
-            "url": item.get("url"),
+            "url": relative_url(item.get("url")),
             "summary": str(item.get("date")),
             "content": strip_html(item.get("raw_body"))[:200],
         })
@@ -427,13 +437,12 @@ def build_site():
             "subtitle": f"{item.get('category', 'News')} | {item.get('author')}",
             "category": "News",
             "department": "Institutional",
-            "url": item.get("url"),
+            "url": relative_url(item.get("url")),
             "summary": item.get("excerpt", ""),
             "content": strip_html(item.get("raw_body"))[:200],
         })
 
     (SITE_DIR / "search.json").write_text(json.dumps(search_items, indent=2), encoding="utf-8")
-    (SITE_DIR / "robots.txt").write_text("User-agent: *\nAllow: /\n", encoding="utf-8")
 
     # 7. Copy Assets
     if (ROOT / "assets").exists():
@@ -445,6 +454,14 @@ def build_site():
 class QuietHandler(http.server.SimpleHTTPRequestHandler):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, directory=str(SITE_DIR), **kwargs)
+
+    def translate_path(self, path):
+        base = "/institutehub"
+        if path.startswith(base + "/"):
+            path = path[len(base):]
+        elif path == base:
+            path = "/"
+        return super().translate_path(path)
 
     def log_message(self, format, *args):
         pass
