@@ -1,0 +1,29 @@
+<nav class="main-nav" aria-label="Main Navigation">
+  <ul class="nav-list">
+    {% for item in site.navigation %}
+      {% assign is_current = false %}
+      {% if page.url == item.url or page.url contains item.url and item.url != '/' %}
+        {% assign is_current = true %}
+      {% endif %}
+      
+      <li class="nav-item {% if is_current %}active{% endif %}">
+        <a href="{{ item.url | relative_url }}" class="nav-link" {% if item.children %}aria-haspopup="true" aria-expanded="false"{% endif %}>
+          <span>{{ item.title }}</span>
+          {% if item.children %}
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          {% endif %}
+        </a>
+        
+        {% if item.children %}
+          <ul class="nav-dropdown" aria-label="{{ item.title }} submenu">
+            {% for sub in item.children %}
+              <li>
+                <a href="{{ sub.url | relative_url }}" class="dropdown-link">{{ sub.title }}</a>
+              </li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      </li>
+    {% endfor %}
+  </ul>
+</nav>

@@ -1,0 +1,103 @@
+---
+layout: default
+---
+
+<header class="page-header">
+  <div class="container">
+    {% include breadcrumbs.html %}
+    <div style="margin-bottom: 0.5rem; display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap;">
+      <span class="badge badge-accent">{{ page.code }}</span>
+      <span class="badge badge-primary">{{ page.credits }} Credits</span>
+      <span class="badge badge-secondary">{{ page.semester }} Semester</span>
+    </div>
+    <h1 class="page-title">{{ page.title }}</h1>
+    <p class="page-description">
+      Department of {{ page.department }} &bull; Level: {{ page.level | default: "Undergraduate / Graduate" }}
+    </p>
+  </div>
+</header>
+
+<div class="section">
+  <div class="container">
+    <div class="layout-with-sidebar">
+      <div>
+        <section style="margin-bottom: 2.5rem;">
+          <h2 style="font-size: 1.35rem; color: var(--color-primary); border-bottom: 2px solid var(--color-border); padding-bottom: 0.4rem; margin-bottom: 1rem;">
+            Course Description & Objectives
+          </h2>
+          <div class="prose">
+            {{ content }}
+          </div>
+        </section>
+
+        {% if page.topics %}
+        <section style="margin-bottom: 2.5rem;">
+          <h2 style="font-size: 1.35rem; color: var(--color-primary); border-bottom: 2px solid var(--color-border); padding-bottom: 0.4rem; margin-bottom: 1rem;">
+            Syllabus & Core Modules
+          </h2>
+          <ol style="padding-left: 1.25rem; font-size: 0.95rem; line-height: 1.7;">
+            {% for topic in page.topics %}
+              <li style="margin-bottom: 0.5rem;">
+                <strong>{{ topic.module }}:</strong> {{ topic.title }}
+                {% if topic.description %}<p style="font-size: 0.85rem; color: var(--color-text-muted); margin-top: 0.2rem;">{{ topic.description }}</p>{% endif %}
+              </li>
+            {% endfor %}
+          </ol>
+        </section>
+        {% endif %}
+
+        {% if page.textbooks %}
+        <section style="margin-bottom: 2.5rem;">
+          <h2 style="font-size: 1.35rem; color: var(--color-primary); border-bottom: 2px solid var(--color-border); padding-bottom: 0.4rem; margin-bottom: 1rem;">
+            Recommended Textbooks & References
+          </h2>
+          <ul style="list-style: none; padding-left: 0; font-size: 0.9rem;">
+            {% for book in page.textbooks %}
+              <li style="padding: 0.4rem 0; border-bottom: 1px dashed var(--color-border);">
+                &bull; {{ book }}
+              </li>
+            {% endfor %}
+          </ul>
+        </section>
+        {% endif %}
+      </div>
+
+      <aside>
+        <div class="sidebar-widget">
+          <h3 class="sidebar-title">Curriculum Specs</h3>
+          <div style="font-size: 0.85rem; display: flex; flex-direction: column; gap: 0.75rem;">
+            <div>
+              <span style="font-weight: 700; color: var(--color-text-light); display: block;">Course Code</span>
+              <span style="font-weight: 700; font-family: var(--font-mono);">{{ page.code }}</span>
+            </div>
+            <div>
+              <span style="font-weight: 700; color: var(--color-text-light); display: block;">Academic Credits</span>
+              <span>{{ page.credits }} Units (Lecture: {{ page.lecture_hours | default: 3 }}h / Lab: {{ page.lab_hours | default: 0 }}h)</span>
+            </div>
+            <div>
+              <span style="font-weight: 700; color: var(--color-text-light); display: block;">Department</span>
+              <span>{{ page.department }}</span>
+            </div>
+            <div>
+              <span style="font-weight: 700; color: var(--color-text-light); display: block;">Prerequisites</span>
+              <span>{{ page.prerequisites | default: "None / Department Permission" }}</span>
+            </div>
+            {% if page.faculty %}
+            <div>
+              <span style="font-weight: 700; color: var(--color-text-light); display: block;">Lead Instructor</span>
+              <span>{{ page.faculty }}</span>
+            </div>
+            {% endif %}
+          </div>
+        </div>
+
+        <div class="sidebar-widget">
+          <h3 class="sidebar-title">Academic Links</h3>
+          <a href="{{ '/academics/' | relative_url }}" class="btn btn-outline btn-sm" style="width: 100%; margin-bottom: 0.5rem;">
+            &larr; Academic Programs
+          </a>
+        </div>
+      </aside>
+    </div>
+  </div>
+</div>

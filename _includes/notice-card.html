@@ -1,0 +1,26 @@
+<div class="notice-card notice-item" data-category="{{ include.notice.category }}">
+  <div class="notice-main-info">
+    <div class="notice-date-pill">
+      {{ include.notice.date | date: "%d %b %Y" }}
+    </div>
+    <div>
+      <div style="display: flex; gap: 0.35rem; align-items: center; margin-bottom: 0.25rem;">
+        <span class="badge badge-secondary" style="font-size: 0.65rem;">{{ include.notice.category }}</span>
+        <span style="font-size: 0.75rem; color: var(--color-text-light);">{{ include.notice.department }}</span>
+      </div>
+      <h3 style="font-size: 1rem; font-weight: 700; line-height: 1.35; margin-bottom: 0.25rem;">
+        <a href="{{ include.notice.url | relative_url }}" style="color: var(--color-primary);">
+          {{ include.notice.title }}
+        </a>
+      </h3>
+      <p style="font-size: 0.8rem; color: var(--color-text-muted); margin: 0;">
+        Ref: {{ include.notice.ref_no | default: "IH/OFFICIAL" }} &bull; Audience: {{ include.notice.audience | default: "General" }}
+      </p>
+    </div>
+  </div>
+  <div style="display: flex; gap: 0.5rem; align-items: center; margin-top: 0.5rem; @media(min-width: 768px){ margin-top: 0; }">
+    <a href="{{ include.notice.url | relative_url }}" class="btn btn-outline btn-sm">
+      Read Circular &rarr;
+    </a>
+  </div>
+</div>

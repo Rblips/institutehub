@@ -1,0 +1,31 @@
+---
+layout: default
+title: "Page Not Found (404)"
+permalink: /404.html
+description: "The page you are looking for might have been removed, had its name changed, or is temporarily unavailable."
+---
+
+<div class="error-page-container">
+  <div class="error-code">404</div>
+  <h1 class="error-title">Page Not Found</h1>
+  <p class="error-description">
+    The requested resource could not be found on the InstituteHub server. It may have been relocated, archived, or the link may be inaccurate.
+  </p>
+  
+  <div class="error-actions">
+    <a href="{{ '/' | relative_url }}" class="btn btn-primary">Return to Homepage</a>
+    <a href="{{ '/academics/' | relative_url }}" class="btn btn-secondary">Explore Academics</a>
+    <a href="{{ '/contact/' | relative_url }}" class="btn btn-outline">Contact Directory</a>
+  </div>
+
+  <div class="error-help-box">
+    <h3>Looking for something specific?</h3>
+    <p>Try searching across our academic catalog, faculty profiles, research projects, and official circulars:</p>
+    <div class="search-trigger-wrapper">
+      <button type="button" class="search-trigger-btn" onclick="openSearchModal()">
+        <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        <span>Open Site Search (Press / to search)</span>
+      </button>
+    </div>
+  </div>
+</div>

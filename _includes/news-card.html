@@ -1,0 +1,24 @@
+<article class="card">
+  <div class="card-body">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+      <span class="badge badge-accent">{{ include.post.category | default: "News" }}</span>
+      <time datetime="{{ include.post.date | date_to_xmlschema }}" style="font-size: 0.75rem; color: var(--color-text-light);">
+        {{ include.post.date | date: "%B %d, %Y" }}
+      </time>
+    </div>
+    <h3 class="card-title">
+      <a href="{{ include.post.url | relative_url }}">{{ include.post.title }}</a>
+    </h3>
+    <p class="card-text">
+      {{ include.post.excerpt | strip_html | truncatewords: 20 }}
+    </p>
+  </div>
+  <div class="card-footer">
+    <span style="font-size: 0.75rem; color: var(--color-text-light);">
+      By {{ include.post.author | default: "InstituteHub Editorial" }}
+    </span>
+    <a href="{{ include.post.url | relative_url }}" class="btn btn-outline btn-sm">
+      Read Story &rarr;
+    </a>
+  </div>
+</article>

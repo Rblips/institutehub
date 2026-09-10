@@ -1,0 +1,60 @@
+---
+layout: null
+permalink: /sitemap.xml
+---
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  {% for page in site.pages %}
+    {% unless page.url contains '.json' or page.url contains '.xml' or page.url contains '404' or page.url contains 'robots' or page.url contains 'maintenance' %}
+  <url>
+    <loc>{{ page.url | absolute_url }}</loc>
+    <lastmod>{{ site.time | date_to_xmlschema }}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+    {% endunless %}
+  {% endfor %}
+  {% for post in site.posts %}
+  <url>
+    <loc>{{ post.url | absolute_url }}</loc>
+    <lastmod>{{ post.date | date_to_xmlschema }}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  {% endfor %}
+  {% for item in site.faculty %}
+  <url>
+    <loc>{{ item.url | absolute_url }}</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  {% endfor %}
+  {% for item in site.research %}
+  <url>
+    <loc>{{ item.url | absolute_url }}</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  {% endfor %}
+  {% for item in site.courses %}
+  <url>
+    <loc>{{ item.url | absolute_url }}</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  {% endfor %}
+  {% for item in site.events %}
+  <url>
+    <loc>{{ item.url | absolute_url }}</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  {% endfor %}
+  {% for item in site.notices %}
+  <url>
+    <loc>{{ item.url | absolute_url }}</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.7</priority>
+  </url>
+  {% endfor %}
+</urlset>

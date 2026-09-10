@@ -1,0 +1,28 @@
+<article class="card faculty-card faculty-item-card" 
+         data-department="{{ include.faculty.department }}" 
+         data-interests="{{ include.faculty.research_interests | join: ' ' }}">
+  <div class="card-body">
+    <div class="faculty-avatar-box">
+      {{ include.faculty.name | slice: 0, 1 }}
+    </div>
+    <div class="faculty-designation">{{ include.faculty.designation }}</div>
+    <h3 class="card-title">
+      <a href="{{ include.faculty.url | relative_url }}">{{ include.faculty.name }}</a>
+    </h3>
+    <div class="faculty-department">{{ include.faculty.department }}</div>
+    
+    <div class="faculty-tags">
+      {% for interest in include.faculty.research_interests limit: 3 %}
+        <span class="faculty-tag-pill">{{ interest }}</span>
+      {% endfor %}
+    </div>
+  </div>
+  <div class="card-footer">
+    <a href="mailto:{{ include.faculty.email }}" style="font-size: 0.8rem; color: var(--color-text-muted);">
+      {{ include.faculty.email }}
+    </a>
+    <a href="{{ include.faculty.url | relative_url }}" class="btn btn-outline btn-sm">
+      Profile &rarr;
+    </a>
+  </div>
+</article>

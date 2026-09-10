@@ -1,0 +1,85 @@
+---
+layout: null
+permalink: /search.json
+---
+[
+  {% assign first = true %}
+  {% for item in site.faculty %}
+    {% unless first %},{% endunless %}
+    {
+      "title": {{ item.name | jsonify }},
+      "subtitle": {{ item.designation | append: " - " | append: item.department | jsonify }},
+      "category": "Faculty",
+      "department": {{ item.department | jsonify }},
+      "url": {{ item.url | relative_url | jsonify }},
+      "summary": {{ item.research_interests | join: ", " | jsonify }},
+      "content": {{ item.content | strip_html | strip_newlines | truncatewords: 40 | jsonify }}
+    }
+    {% assign first = false %}
+  {% endfor %}
+  {% for item in site.research %}
+    {% unless first %},{% endunless %}
+    {
+      "title": {{ item.title | jsonify }},
+      "subtitle": {{ item.area | append: " | PI: " | append: item.principal_investigator | jsonify }},
+      "category": "Research",
+      "department": {{ item.department | default: "Interdisciplinary" | jsonify }},
+      "url": {{ item.url | relative_url | jsonify }},
+      "summary": {{ item.description | default: item.summary | jsonify }},
+      "content": {{ item.content | strip_html | strip_newlines | truncatewords: 40 | jsonify }}
+    }
+    {% assign first = false %}
+  {% endfor %}
+  {% for item in site.courses %}
+    {% unless first %},{% endunless %}
+    {
+      "title": {{ item.code | append: ": " | append: item.title | jsonify }},
+      "subtitle": {{ item.department | append: " - " | append: item.credits | append: " Credits" | jsonify }},
+      "category": "Courses",
+      "department": {{ item.department | jsonify }},
+      "url": {{ item.url | relative_url | jsonify }},
+      "summary": {{ item.description | jsonify }},
+      "content": {{ item.content | strip_html | strip_newlines | truncatewords: 40 | jsonify }}
+    }
+    {% assign first = false %}
+  {% endfor %}
+  {% for item in site.events %}
+    {% unless first %},{% endunless %}
+    {
+      "title": {{ item.title | jsonify }},
+      "subtitle": {{ item.category | append: " | " | append: item.location | jsonify }},
+      "category": "Events",
+      "department": "Campus",
+      "url": {{ item.url | relative_url | jsonify }},
+      "summary": {{ item.date | date: "%B %d, %Y" | append: " - " | append: item.time | jsonify }},
+      "content": {{ item.content | strip_html | strip_newlines | truncatewords: 40 | jsonify }}
+    }
+    {% assign first = false %}
+  {% endfor %}
+  {% for item in site.notices %}
+    {% unless first %},{% endunless %}
+    {
+      "title": {{ item.title | jsonify }},
+      "subtitle": {{ item.category | append: " Notice | " | append: item.ref_no | jsonify }},
+      "category": "Notices",
+      "department": {{ item.department | jsonify }},
+      "url": {{ item.url | relative_url | jsonify }},
+      "summary": {{ item.date | date: "%B %d, %Y" | jsonify }},
+      "content": {{ item.content | strip_html | strip_newlines | truncatewords: 40 | jsonify }}
+    }
+    {% assign first = false %}
+  {% endfor %}
+  {% for item in site.posts %}
+    {% unless first %},{% endunless %}
+    {
+      "title": {{ item.title | jsonify }},
+      "subtitle": {{ item.category | default: "News" | append: " | " | append: item.author | jsonify }},
+      "category": "News",
+      "department": "Institutional",
+      "url": {{ item.url | relative_url | jsonify }},
+      "summary": {{ item.excerpt | strip_html | strip_newlines | truncatewords: 25 | jsonify }},
+      "content": {{ item.content | strip_html | strip_newlines | truncatewords: 40 | jsonify }}
+    }
+    {% assign first = false %}
+  {% endfor %}
+]

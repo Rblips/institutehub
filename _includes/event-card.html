@@ -1,0 +1,33 @@
+<article class="card event-card event-item-row" 
+         data-category="{{ include.event.category }}" 
+         data-timing="{{ include.timing | default: 'upcoming' }}">
+  <div class="event-date-badge">
+    <span class="event-date-month">{{ include.event.date | date: "%b" }}</span>
+    <span class="event-date-day">{{ include.event.date | date: "%d" }}</span>
+    <span style="font-size: 0.65rem; opacity: 0.85;">{{ include.event.date | date: "%Y" }}</span>
+  </div>
+  <div class="event-content">
+    <div class="event-meta">
+      <span class="badge badge-accent">{{ include.event.category }}</span>
+      <span>
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: inline; vertical-align: middle;"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+        {{ include.event.time }}
+      </span>
+      <span>
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: inline; vertical-align: middle;"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+        {{ include.event.location }}
+      </span>
+    </div>
+    <h3 class="card-title" style="margin-bottom: 0.4rem;">
+      <a href="{{ include.event.url | relative_url }}">{{ include.event.title }}</a>
+    </h3>
+    {% if include.event.speaker %}
+      <p style="font-size: 0.8rem; color: var(--color-text-muted); margin-bottom: 0.5rem;">
+        Speaker: <strong>{{ include.event.speaker }}</strong>
+      </p>
+    {% endif %}
+    <a href="{{ include.event.url | relative_url }}" class="btn btn-outline btn-sm">
+      Details & RSVP &rarr;
+    </a>
+  </div>
+</article>

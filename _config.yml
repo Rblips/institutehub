@@ -1,0 +1,240 @@
+# InstituteHub - Jekyll Configuration
+# Engineering Knowledge. Advancing Tomorrow.
+
+title: "InstituteHub"
+tagline: "Engineering Knowledge. Advancing Tomorrow."
+description: "InstituteHub is a premier engineering institute dedicated to world-class education, frontier technological research, and academic excellence."
+url: "https://institutehub.edu"
+baseurl: ""
+repository: "institutehub/institutehub"
+
+# Contact & Institutional Information
+institute:
+  name: "InstituteHub"
+  full_name: "InstituteHub of Technology & Engineering"
+  motto: "Engineering Knowledge. Advancing Tomorrow."
+  established: 1998
+  address: "Tech Innovation Boulevard, Academic District, Sector 4"
+  city: "Technopolis"
+  state: "State of Engineering"
+  postal_code: "560100"
+  country: "India"
+  phone: "+91 (080) 4567-8900"
+  email: "info@institutehub.edu"
+  admissions_email: "admissions@institutehub.edu"
+  registrar_email: "registrar@institutehub.edu"
+  press_email: "media@institutehub.edu"
+  social:
+    twitter: "https://twitter.com/institutehub"
+    linkedin: "https://linkedin.com/school/institutehub"
+    github: "https://github.com/institutehub"
+    youtube: "https://youtube.com/@institutehub"
+
+# Statistics
+stats:
+  years_excellence: "25+"
+  faculty_count: "150+"
+  research_labs: "40+"
+  student_count: "8,000+"
+  patents_filed: "280+"
+  annual_funding: "$45M"
+
+# Collections Configuration
+collections:
+  faculty:
+    output: true
+    permalink: /people/faculty/:slug/
+  research:
+    output: true
+    permalink: /research/projects/:slug/
+  events:
+    output: true
+    permalink: /events/:slug/
+  notices:
+    output: true
+    permalink: /notices/:slug/
+  publications:
+    output: true
+    permalink: /research/publications/:slug/
+  courses:
+    output: true
+    permalink: /academics/courses/:slug/
+
+# Defaults
+defaults:
+  - scope:
+      path: ""
+      type: "faculty"
+    values:
+      layout: "faculty"
+  - scope:
+      path: ""
+      type: "research"
+    values:
+      layout: "research"
+  - scope:
+      path: ""
+      type: "events"
+    values:
+      layout: "event"
+  - scope:
+      path: ""
+      type: "notices"
+    values:
+      layout: "notice"
+  - scope:
+      path: ""
+      type: "courses"
+    values:
+      layout: "course"
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+    values:
+      layout: "default"
+
+# Markdown & Syntax Highlighting
+markdown: kramdown
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+  syntax_highlighter_opts:
+    css_class: 'highlight'
+    span:
+      line_numbers: false
+    block:
+      line_numbers: true
+  hard_wrap: false
+
+# Permalink Style
+permalink: /news/:year/:month/:day/:title/
+
+# Navigation Menu
+navigation:
+  - title: "About"
+    url: "/about/"
+    children:
+      - title: "Overview & History"
+        url: "/about/#overview"
+      - title: "Vision & Mission"
+        url: "/about/#vision-mission"
+      - title: "Leadership & Governance"
+        url: "/about/#leadership"
+      - title: "Core Values"
+        url: "/about/#values"
+      - title: "Accreditation & Rankings"
+        url: "/about/#accreditation"
+  - title: "Academics"
+    url: "/academics/"
+    children:
+      - title: "Undergraduate Programs"
+        url: "/academics/#undergraduate"
+      - title: "Postgraduate Programs"
+        url: "/academics/#postgraduate"
+      - title: "Doctoral (Ph.D.)"
+        url: "/academics/#doctoral"
+      - title: "Academic Departments"
+        url: "/academics/#departments"
+      - title: "Course Catalog"
+        url: "/academics/#courses"
+      - title: "Academic Calendar"
+        url: "/academics/#calendar"
+  - title: "Research"
+    url: "/research/"
+    children:
+      - title: "Research Overview"
+        url: "/research/#overview"
+      - title: "Research Areas"
+        url: "/research/#areas"
+      - title: "Research Labs & Centers"
+        url: "/research/#labs"
+      - title: "Active Projects"
+        url: "/research/#projects"
+      - title: "Publications"
+        url: "/research/#publications"
+      - title: "Industry Collaborations"
+        url: "/research/#collaborations"
+  - title: "People"
+    url: "/people/"
+    children:
+      - title: "Faculty Directory"
+        url: "/people/"
+      - title: "Distinguished Chairs"
+        url: "/people/#distinguished"
+      - title: "Department Leadership"
+        url: "/people/#heads"
+  - title: "Admissions"
+    url: "/admissions/"
+    children:
+      - title: "B.Tech Admissions"
+        url: "/admissions/#undergraduate"
+      - title: "M.Tech & MS Admissions"
+        url: "/admissions/#postgraduate"
+      - title: "Ph.D. Admissions"
+        url: "/admissions/#phd"
+      - title: "Scholarships & Financial Aid"
+        url: "/admissions/#scholarships"
+      - title: "Fee Structure"
+        url: "/admissions/#fees"
+      - title: "Admissions FAQs"
+        url: "/admissions/#faqs"
+  - title: "Campus Life"
+    url: "/campus-life/"
+    children:
+      - title: "Student Housing & Hostels"
+        url: "/campus-life/#housing"
+      - title: "Clubs & Societies"
+        url: "/campus-life/#clubs"
+      - title: "Central Library"
+        url: "/campus-life/#library"
+      - title: "Sports & Fitness"
+        url: "/campus-life/#sports"
+      - title: "Health & Wellbeing"
+        url: "/campus-life/#healthcare"
+  - title: "News & Events"
+    url: "/news/"
+    children:
+      - title: "Institutional News"
+        url: "/news/"
+      - title: "Upcoming Events"
+        url: "/events/"
+      - title: "Official Notices & Circulars"
+        url: "/notices/"
+  - title: "Resources"
+    url: "/resources/"
+    children:
+      - title: "Computing & IT Services"
+        url: "/resources/#it-services"
+      - title: "Central Forms & Downloads"
+        url: "/resources/#downloads"
+      - title: "Academic Ordinances"
+        url: "/resources/#ordinances"
+      - title: "RTI & Disclosures"
+        url: "/resources/#disclosures"
+
+# Build Settings
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor/bundle/
+  - vendor/cache/
+  - vendor/gems/
+  - vendor/ruby/
+  - scripts/
+  - tests/
+  - deployment/
+  - README.md
+  - .gitignore
+  - .github/
+  - .pytest_cache
+  - __pycache__

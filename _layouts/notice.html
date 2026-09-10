@@ -1,0 +1,80 @@
+---
+layout: default
+---
+
+<header class="page-header">
+  <div class="container">
+    {% include breadcrumbs.html %}
+    <div style="margin-bottom: 0.5rem; display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap;">
+      <span class="badge badge-accent">{{ page.category }}</span>
+      <span class="badge badge-secondary">Ref: {{ page.ref_no | default: "IH/OFFICIAL/2026" }}</span>
+      <span style="color: #cbd5e1; font-size: 0.85rem;">Date of Issue: {{ page.date | date: "%B %d, %Y" }}</span>
+    </div>
+    <h1 class="page-title">{{ page.title }}</h1>
+    <p class="page-description">
+      Issued by: <strong>{{ page.department }}</strong> &bull; Office of the Registrar
+    </p>
+  </div>
+</header>
+
+<div class="section">
+  <div class="container">
+    <div class="layout-with-sidebar">
+      <div>
+        <div style="background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: 2rem; box-shadow: var(--shadow-sm);">
+          <div style="display: flex; justify-content: space-between; border-bottom: 2px solid var(--color-border); padding-bottom: 1rem; margin-bottom: 1.5rem; font-size: 0.85rem; color: var(--color-text-muted);">
+            <span><strong>Reference No:</strong> {{ page.ref_no | default: "IH-NOT-2026-01" }}</span>
+            <span><strong>Dated:</strong> {{ page.date | date: "%d %b %Y" }}</span>
+          </div>
+
+          <div class="prose">
+            {{ content }}
+          </div>
+
+          <div style="margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px dashed var(--color-border); display: flex; justify-content: space-between; align-items: flex-end;">
+            <div>
+              <p style="font-size: 0.8rem; color: var(--color-text-light);">Authority:</p>
+              <p style="font-weight: 700; color: var(--color-primary); font-size: 0.95rem;">{{ page.signatory | default: "Assistant Registrar (Academics)" }}</p>
+              <p style="font-size: 0.85rem; color: var(--color-text-muted);">InstituteHub of Technology</p>
+            </div>
+            {% if page.attachment_url %}
+            <div>
+              <a href="{{ page.attachment_url | relative_url }}" class="btn btn-primary btn-sm" download>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                Download PDF Notice
+              </a>
+            </div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+
+      <aside>
+        <div class="sidebar-widget">
+          <h3 class="sidebar-title">Notice Details</h3>
+          <div style="font-size: 0.85rem; display: flex; flex-direction: column; gap: 0.75rem;">
+            <div>
+              <span style="font-weight: 700; color: var(--color-text-light); display: block;">Category</span>
+              <span>{{ page.category }}</span>
+            </div>
+            <div>
+              <span style="font-weight: 700; color: var(--color-text-light); display: block;">Department</span>
+              <span>{{ page.department }}</span>
+            </div>
+            <div>
+              <span style="font-weight: 700; color: var(--color-text-light); display: block;">Target Audience</span>
+              <span>{{ page.audience | default: "All Faculty, Staff & Students" }}</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="sidebar-widget">
+          <h3 class="sidebar-title">Notice Board</h3>
+          <a href="{{ '/notices/' | relative_url }}" class="btn btn-outline btn-sm" style="width: 100%;">
+            &larr; View All Circulars
+          </a>
+        </div>
+      </aside>
+    </div>
+  </div>
+</div>

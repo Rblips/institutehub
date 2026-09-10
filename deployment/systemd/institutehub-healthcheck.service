@@ -1,0 +1,25 @@
+[Unit]
+Description=InstituteHub Production Health & Uptime Monitor
+After=network.target nginx.service
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+User=www-data
+Group=www-data
+WorkingDirectory=/var/www/institutehub/current
+ExecStart=/usr/bin/python3 /var/www/institutehub/current/scripts/health_check.py --url https://institutehub.edu --disk-path /var/www
+StandardOutput=journal
+StandardError=journal
+TimeoutSec=30
+Restart=no
+
+# Hardening Directives
+ProtectSystem=strict
+ProtectHome=yes
+NoNewPrivileges=true
+PrivateTmp=true
+ReadOnlyPaths=/var/www/institutehub
+
+[Install]
+WantedBy=multi-user.target

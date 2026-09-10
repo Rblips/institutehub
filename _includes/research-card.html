@@ -1,0 +1,24 @@
+<article class="card research-card">
+  <div class="card-body">
+    <div class="research-status-badge">
+      <span class="badge badge-primary">{{ include.project.area }}</span>
+    </div>
+    <h3 class="card-title">
+      <a href="{{ include.project.url | relative_url }}">{{ include.project.title }}</a>
+    </h3>
+    <div class="research-pi">
+      <strong>PI:</strong> {{ include.project.principal_investigator }}
+    </div>
+    <p class="card-text">
+      {{ include.project.description | default: include.project.summary | truncatewords: 25 }}
+    </p>
+  </div>
+  <div class="card-footer">
+    <span class="badge {% if include.project.status == 'Active' %}badge-success{% else %}badge-secondary{% endif %}">
+      {{ include.project.status | default: "Active" }}
+    </span>
+    <a href="{{ include.project.url | relative_url }}" class="btn btn-outline btn-sm">
+      Project Details &rarr;
+    </a>
+  </div>
+</article>

@@ -1,0 +1,18 @@
+<div id="searchModalBackdrop" class="search-modal-backdrop" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="searchModalTitle">
+  <div class="search-modal-window">
+    <div class="search-input-header">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--color-primary);"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+      <input type="text" id="searchModalInput" class="search-modal-input" placeholder="Search faculty, courses, research, notices..." autocomplete="off" aria-label="Search InstituteHub">
+      <button type="button" id="searchCloseBtn" class="search-close-btn" aria-label="Close search">&times;</button>
+    </div>
+    <ul id="searchResultsList" class="search-results-list" role="listbox">
+      <li style="padding: 1.5rem; text-align: center; color: var(--color-text-light); font-size: 0.9rem;">
+        Type at least 2 characters to search across all collections.
+      </li>
+    </ul>
+    <div style="background: var(--color-surface-subtle); border-top: 1px solid var(--color-border); padding: 0.5rem 1rem; font-size: 0.75rem; color: var(--color-text-light); display: flex; justify-content: space-between;">
+      <span><strong>Navigation:</strong> Click to open result</span>
+      <span><strong>Close:</strong> ESC</span>
+    </div>
+  </div>
+</div>

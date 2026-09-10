@@ -1,0 +1,72 @@
+<div class="top-bar">
+  <div class="container top-bar-inner">
+    <ul class="top-bar-links">
+      <li><a href="{{ '/about/#leadership' | relative_url }}">Administration</a></li>
+      <li><a href="{{ '/resources/#it-services' | relative_url }}">IT Services</a></li>
+      <li><a href="{{ '/campus-life/#library' | relative_url }}">Library</a></li>
+      <li><a href="{{ '/notices/' | relative_url }}">Circulars</a></li>
+      <li><a href="{{ '/contact/' | relative_url }}">Directory</a></li>
+    </ul>
+    <div class="top-bar-meta">
+      <span>Academic Year 2026&ndash;2027</span>
+      <a href="{{ '/admissions/' | relative_url }}" class="badge badge-accent" style="text-decoration: none;">Admissions Open</a>
+    </div>
+  </div>
+</div>
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="{{ '/' | relative_url }}" class="site-brand" aria-label="InstituteHub Homepage">
+      <div class="brand-logo-mark">IH</div>
+      <div class="brand-text-group">
+        <span class="brand-name">InstituteHub</span>
+        <span class="brand-tagline">Engineering &bull; Research &bull; Innovation</span>
+      </div>
+    </a>
+
+    {% include navigation.html %}
+
+    <div class="header-actions">
+      <button type="button" class="btn-search-trigger" id="openSearchBtn" aria-label="Search InstituteHub">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        <span>Search</span>
+        <span class="search-shortcut">/</span>
+      </button>
+
+      <a href="{{ '/admissions/' | relative_url }}" class="btn btn-accent btn-sm" style="display: none; @media(min-width: 640px){ display: inline-flex; }">
+        Apply Now
+      </a>
+
+      <button type="button" class="btn-mobile-toggle" id="mobileNavToggle" aria-label="Toggle Navigation Menu" aria-expanded="false" aria-controls="mobileNavDrawer">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile Navigation Drawer -->
+<nav id="mobileNavDrawer" class="mobile-nav-drawer" aria-label="Mobile Navigation">
+  <ul class="mobile-nav-list">
+    {% for item in site.navigation %}
+      <li class="mobile-nav-item">
+        <a href="{{ item.url | relative_url }}" class="mobile-nav-link">
+          <span>{{ item.title }}</span>
+        </a>
+        {% if item.children %}
+          <ul class="mobile-submenu">
+            {% for sub in item.children %}
+              <li><a href="{{ sub.url | relative_url }}">{{ sub.title }}</a></li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      </li>
+    {% endfor %}
+    <li class="mobile-nav-item" style="padding-top: 1.5rem;">
+      <a href="{{ '/admissions/' | relative_url }}" class="btn btn-accent" style="width: 100%;">
+        Admissions Portal &rarr;
+      </a>
+    </li>
+  </ul>
+</nav>

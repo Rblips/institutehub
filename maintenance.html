@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scheduled Maintenance | InstituteHub</title>
+  <style>
+    :root {
+      --primary-color: #0d2c54;
+      --accent-color: #a81c24;
+      --text-main: #1f2937;
+      --text-muted: #6b7280;
+      --bg-page: #f8fafc;
+      --card-bg: #ffffff;
+      --border-color: #e2e8f0;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+      background-color: var(--bg-page);
+      color: var(--text-main);
+      display: flex;
+      min-height: 100vh;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+    .maintenance-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-top: 4px solid var(--accent-color);
+      border-radius: 8px;
+      padding: 3rem 2.5rem;
+      max-width: 620px;
+      width: 100%;
+      box-shadow: 0 10px 25px rgba(13, 44, 84, 0.08);
+      text-align: center;
+    }
+    .badge {
+      display: inline-block;
+      background: #fef2f2;
+      color: var(--accent-color);
+      font-size: 0.825rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 0.35rem 0.85rem;
+      border-radius: 9999px;
+      margin-bottom: 1.25rem;
+      border: 1px solid #fecaca;
+    }
+    h1 {
+      color: var(--primary-color);
+      font-size: 1.85rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      letter-spacing: -0.02em;
+    }
+    p {
+      color: var(--text-muted);
+      line-height: 1.65;
+      font-size: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    .status-grid {
+      background: #f1f5f9;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      text-align: left;
+      font-size: 0.9rem;
+      margin-bottom: 1.75rem;
+    }
+    .status-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.35rem 0;
+      border-bottom: 1px dashed #cbd5e1;
+    }
+    .status-row:last-child { border-bottom: none; }
+    .status-label { font-weight: 600; color: var(--primary-color); }
+    .status-value { color: var(--text-main); }
+    .footer-note {
+      font-size: 0.825rem;
+      color: var(--text-muted);
+    }
+  </style>
+</head>
+<body>
+  <main class="maintenance-card">
+    <div class="badge">Scheduled System Maintenance</div>
+    <h1>InstituteHub Services Updating</h1>
+    <p>
+      The InstituteHub web systems and academic computing portal are undergoing planned maintenance and upgrades. Normal services will be restored shortly.
+    </p>
+
+    <div class="status-grid">
+      <div class="status-row">
+        <span class="status-label">System:</span>
+        <span class="status-value">InstituteHub Primary Cluster</span>
+      </div>
+      <div class="status-row">
+        <span class="status-label">Status:</span>
+        <span class="status-value">Routine Kernel & CDN Maintenance</span>
+      </div>
+      <div class="status-row">
+        <span class="status-label">Emergency Desk:</span>
+        <span class="status-value">helpdesk@institutehub.edu</span>
+      </div>
+    </div>
+
+    <div class="footer-note">
+      InstituteHub of Technology & Engineering &bull; Office of Information Technology Services
+    </div>
+  </main>
+</body>
+</html>
