@@ -22,7 +22,12 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: '3.2'
-          bundler-cache: true
+          bundler-cache: false
+
+      - name: Install Bundler Dependencies
+        run: |
+          bundle lock --add-platform x86_64-linux || true
+          bundle install --jobs 4 --retry 3
 
       - name: Set up Python 3.11
         uses: actions/setup-python@v5
@@ -33,7 +38,7 @@ jobs:
       - name: Install Python Test Dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install pytest
+          pip install pytest pyyaml jinja2 markdown
 
       - name: Validate Jekyll Build
         run: |
